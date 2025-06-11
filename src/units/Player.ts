@@ -3,14 +3,13 @@ import { Unit } from "../classes/Unit";
 import { renderSprite } from "../renderHelpers/renderSprite";
 
 export class Player extends Unit {
-  speed: number = 2;
   direction: "left" | "right" | "none" = "none";
   constructor(game: Game) {
     const size = 64;
     super({
       game,
       coordinates: {
-        x: game.canvas.width / 2 - size / 2,
+        x: game.canvas.width / 4 - size / 2,
         y: game.canvas.height - size,
       },
       width: size,
@@ -18,9 +17,11 @@ export class Player extends Unit {
     });
   }
 
-  update() {
-    super.update();
+  jump() {
+    this.speedY = -10;
+  }
 
+  update() {
     // D is pressed and A is not pressed
     if (
       this.game.keyboardHandler.pressedKeys["D"] &&
@@ -39,15 +40,14 @@ export class Player extends Unit {
     }
 
     if (this.direction === "right") {
-      this.coordinates.x = Math.min(
-        this.coordinates.x + this.speed,
-        this.game.canvas.width - this.width
-      );
+      this.coordinates.x += this.speedX;
     }
 
     if (this.direction === "left") {
-      this.coordinates.x = Math.max(this.coordinates.x - this.speed, 0);
+      this.coordinates.x -= this.speedX;
     }
+
+    super.update();
   }
 
   render() {

@@ -47,6 +47,15 @@ export class KeyboardHandler {
       return;
     }
 
+    if (e.key === " ") {
+      this.#game.player?.jump();
+    }
+
+    if (e.key === "Escape") {
+      this.#game.paused = !this.#game.paused;
+      return;
+    }
+
     this.#pressedKeys[e.key.toUpperCase()] = true;
   };
 

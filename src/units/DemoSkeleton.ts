@@ -4,29 +4,30 @@ import { renderSprite } from "../renderHelpers/renderSprite";
 
 export class DemoSkeleton extends Unit {
   direction: "left" | "right" = "right";
-  speed: number = 1;
+
   constructor(game: Game) {
     const size = 64;
     super({
       game,
       coordinates: {
         x: game.canvas.width / 2 - size / 2,
-        y: game.canvas.height - size,
+        y: game.canvas.height - size / 2,
       },
       width: size,
       height: size,
     });
+    this.direction = Math.random() < 0.5 ? "left" : "right";
   }
 
   update() {
     super.update();
     if (this.direction === "right") {
-      this.coordinates.x += this.speed;
+      this.coordinates.x += this.speedX;
       if (this.coordinates.x > this.game.canvas.width - this.width) {
         this.direction = "left";
       }
     } else {
-      this.coordinates.x -= this.speed;
+      this.coordinates.x -= this.speedX;
       if (this.coordinates.x < 0) {
         this.direction = "right";
       }

@@ -12,10 +12,10 @@ export class Game {
   keyboardHandler: KeyboardHandler;
   /* @ts-expect-error Images will be loaded in the constructor */
   images: Record<ImageName, HTMLImageElement> = {};
-  gameSpeed = 1000;
   lastUpdate = Date.now();
   paused = false;
   units: Unit[] = [];
+  player: Player | null = null;
 
   constructor() {
     const c = document.querySelector("#canvas") as HTMLCanvasElement;
@@ -40,7 +40,7 @@ export class Game {
     this.keyboardHandler.init();
     this.loadImages();
     this.units.push(new DemoSkeleton(this));
-    this.units.push(new Player(this));
+    this.player = new Player(this);
   }
 
   loadImages() {
@@ -63,6 +63,8 @@ export class Game {
     this.units.forEach((unit) => {
       unit.update();
     });
+
+    this.player?.update();
 
     this.lastUpdate = now;
   }
@@ -93,5 +95,9 @@ export class Game {
     this.units.forEach((unit) => {
       unit.render();
     });
+
+    this.player?.render();
+
+    this.ctx.restore();
   }
 }

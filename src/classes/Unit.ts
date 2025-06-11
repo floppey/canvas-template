@@ -7,10 +7,14 @@ interface UnitOptions {
   coordinates: Coordinates;
   width: number;
   height: number;
+  speedX?: number;
+  speedY?: number;
 }
 
 export class Unit extends Entity {
   game: Game;
+  speedX: number;
+  speedY: number;
   #coordinates: Coordinates;
   #width: number;
   #height: number;
@@ -21,13 +25,22 @@ export class Unit extends Entity {
     bottomRight: Coordinates;
   };
 
-  constructor({ game, coordinates, width = 32, height = 32 }: UnitOptions) {
+  constructor({
+    game,
+    coordinates,
+    width = 32,
+    height = 32,
+    speedX = 1,
+    speedY = 0,
+  }: UnitOptions) {
     super();
     this.game = game;
     this.#width = width;
     this.#height = height;
     this.#coordinates = coordinates;
     const { x, y } = coordinates;
+    this.speedX = speedX;
+    this.speedY = speedY;
     this.hitbox = {
       topLeft: { x: x, y: y },
       topRight: { x: x + width, y: y },
@@ -47,6 +60,17 @@ export class Unit extends Entity {
   }
 
   update() {
+    this.speedY = Math.min(this.speedY + 0.25, 10);
+    this.#coordinates.y += this.speedY;
+
+    this.#coordinates.y = Math.min(
+      this.#coordinates.y,
+      this.game.canvas.height - this.height
+    );
+    this.#coordinates.y = Math.max(this.#coordinates.y, this.height);
+    this.#coordinates.x = Math.min(this.#coordinates.x, this.game.canvas.width);
+    this.#coordinates.x = Math.max(this.#coordinates.x, 0);
+
     this.updateHitbox();
   }
 
