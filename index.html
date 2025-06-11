@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Template</title>
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="preload" as="image" href="/assets/monsters/OrcWarrior.png" />
+    <link rel="preload" as="image" href="/assets/monsters/Skeleton.png" />
+  </head>
+  <body>
+    <div id="game-container">
+      <div id="ui-container">
+        Add your UI elements here
+        <button type="button" onclick="javascript:window.game.paused = true">Pause</button>
+        <button type="button" onclick="javascript:window.game.paused = false">Resume</button>
+      </div>
+      <canvas id="canvas"></canvas>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
