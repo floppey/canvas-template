@@ -86,7 +86,12 @@ export class Game {
       this.canvas.height / 2 - 50
     );
     this.ctx.fillText(
-      new Date(this.lastUpdate).toLocaleTimeString(),
+      new Date(this.lastUpdate).toLocaleTimeString("nb-NO", {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }),
       this.canvas.width / 2,
       this.canvas.height / 2
     );
