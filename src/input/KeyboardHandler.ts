@@ -43,11 +43,11 @@ export class KeyboardHandler {
   }
 
   private keyDownHandler = (e: KeyboardEvent) => {
-    if (this.ignoreInput(e) || this.#pressedKeys[e.keyCode]) {
+    if (this.ignoreInput(e) || this.#pressedKeys[e.key.toUpperCase()]) {
       return;
     }
 
-    this.#pressedKeys[e.keyCode] = true;
+    this.#pressedKeys[e.key.toUpperCase()] = true;
   };
 
   private ignoreInput(e: KeyboardEvent) {
@@ -64,7 +64,7 @@ export class KeyboardHandler {
     if (this.ignoreInput(e)) {
       return;
     }
-    this.#pressedKeys[e.keyCode] = false;
+    this.#pressedKeys[e.key.toUpperCase()] = false;
   };
 
   destroy() {

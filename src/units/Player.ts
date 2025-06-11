@@ -23,15 +23,15 @@ export class Player extends Unit {
 
     // D is pressed and A is not pressed
     if (
-      this.game.keyboardHandler.pressedKeys["68"] &&
-      !this.game.keyboardHandler.pressedKeys["65"]
+      this.game.keyboardHandler.pressedKeys["D"] &&
+      !this.game.keyboardHandler.pressedKeys["A"]
     ) {
       this.direction = "right";
     }
     // A is pressed and D is not pressed
     else if (
-      this.game.keyboardHandler.pressedKeys["65"] &&
-      !this.game.keyboardHandler.pressedKeys["68"]
+      this.game.keyboardHandler.pressedKeys["A"] &&
+      !this.game.keyboardHandler.pressedKeys["D"]
     ) {
       this.direction = "left";
     } else {
